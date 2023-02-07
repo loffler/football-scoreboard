@@ -1,0 +1,7 @@
+{
+  "name": "football-scoreboard",
+  "version": "1.0.0",
+  "description": "Simple library for managing football scoreboard",
+  "main": "src/index.ts",
+  "license": "MIT"
+}

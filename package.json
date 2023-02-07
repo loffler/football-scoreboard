@@ -2,9 +2,11 @@
   "name": "football-scoreboard",
   "version": "1.0.0",
   "description": "Simple library for managing football scoreboard",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
+    "build": "tsc",
     "test": "jest"
   },
   "devDependencies": {

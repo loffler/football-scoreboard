@@ -32,20 +32,23 @@ describe('Scoreboard', () => {
   });
 
   it('should get summary of ongoing games', () => {
-    let game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
-    scoreboard.updateScore(game, 1, 1)
-    game = scoreboard.startGame('FC Liverpool', 'Ajax Amsterdam')
-    scoreboard.updateScore(game, 5, 2)
-    game = scoreboard.startGame('Atletico Madrid', 'FC Porto')
-    scoreboard.updateScore(game, 2, 5)
-    game = scoreboard.startGame('Bayern', 'Chelsea')
-    scoreboard.updateScore(game, 4, 4)
+    let game = scoreboard.startGame('Mexico', 'Canada')
+    scoreboard.updateScore(game, 0, 5)
+    game = scoreboard.startGame('Spain', 'Brazil')
+    scoreboard.updateScore(game, 10, 2)
+    game = scoreboard.startGame('Germany', 'France')
+    scoreboard.updateScore(game, 2, 2)
+    game = scoreboard.startGame('Uruguay', 'Italy')
+    scoreboard.updateScore(game, 6, 6)
+    game = scoreboard.startGame('Argentina', 'Australia')
+    scoreboard.updateScore(game, 3, 1)
 
     expect(scoreboard.getSummary()).toEqual([
-      '1. Bayern 4 - Chelsea 4',
-      '2. FC Liverpool 5 - Ajax Amsterdam 2',
-      '3. Atletico Madrid 2 - FC Porto 5',
-      '4. FC Barcelona 1 - Real Madrid 1',
+      '1. Uruguay 6 - Italy 6',
+      '2. Spain 10 - Brazil 2',
+      '3. Mexico 0 - Canada 5',
+      '4. Argentina 3 - Australia 1',
+      '5. Germany 2 - France 2',
     ])
   })
 })

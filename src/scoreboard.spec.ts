@@ -1,7 +1,11 @@
 import {Scoreboard} from './scoreboard';
 
 describe('Scoreboard', () => {
-  let scoreboard = new Scoreboard();
+  let scoreboard: Scoreboard
+
+  beforeEach(() => {
+    scoreboard = new Scoreboard()
+  })
 
   it('should start new game', () => {
     const game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
@@ -22,6 +26,7 @@ describe('Scoreboard', () => {
     const game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
     scoreboard.startGame('FC Liverpool', 'Ajax Amsterdam')
     scoreboard.finishGame(game)
+    expect(game.getStatus()).toEqual('FINISHED')
     expect(scoreboard.getSummary()).toHaveLength(1)
     expect(scoreboard.getSummary()).toEqual(['1. FC Liverpool 0 - Ajax Amsterdam 0'])
   });

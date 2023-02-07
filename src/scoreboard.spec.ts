@@ -14,6 +14,11 @@ describe('Scoreboard', () => {
     expect(scoreboard.getSummary()).toHaveLength(1)
   });
 
+  it('should not start new game if one team is already playing', () => {
+    const game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
+    expect(() => scoreboard.startGame('FC Barcelona', 'Ajax Amsterdam')).toThrowError()
+  });
+
   it('should update score of a game', () => {
     const game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
     game.updateScore(2, 1)

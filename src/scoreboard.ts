@@ -5,6 +5,11 @@ export class Scoreboard {
 
   startGame(homeTeam: string, awayTeam: string): Game {
     const game = new Game(homeTeam, awayTeam)
+    if (this.games.some((game) =>
+      [game.getHomeTeam(), game.getAwayTeam()].includes(homeTeam) ||
+      [game.getHomeTeam(), game.getAwayTeam()].includes(awayTeam)
+    )) throw new Error('One of the teams is already playing.')
+
     this.games.push(game)
     return game
   }

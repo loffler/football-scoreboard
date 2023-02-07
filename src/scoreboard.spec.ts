@@ -16,7 +16,7 @@ describe('Scoreboard', () => {
 
   it('should update score of a game', () => {
     const game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
-    scoreboard.updateScore(game, 2, 1)
+    game.updateScore(2, 1)
     expect(game.getHomePoints()).toEqual(2)
     expect(game.getAwayPoints()).toEqual(1)
     expect(scoreboard.getSummary()).toEqual(['1. FC Barcelona 2 - Real Madrid 1'])
@@ -24,14 +24,14 @@ describe('Scoreboard', () => {
 
   it('should not update score with negative values', () => {
     const game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
-    expect(() => scoreboard.updateScore(game, -1, 1)).toThrowError()
-    expect(() => scoreboard.updateScore(game, 1.5, 1)).toThrowError()
+    expect(() => game.updateScore(-1, 1)).toThrowError()
+    expect(() => game.updateScore(1.5, 1)).toThrowError()
   })
 
   it('should finish game', () => {
     const game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
     scoreboard.startGame('FC Liverpool', 'Ajax Amsterdam')
-    scoreboard.finishGame(game)
+    game.finish()
     expect(game.getStatus()).toEqual('FINISHED')
     expect(scoreboard.getSummary()).toHaveLength(1)
     expect(scoreboard.getSummary()).toEqual(['1. FC Liverpool 0 - Ajax Amsterdam 0'])
@@ -39,21 +39,21 @@ describe('Scoreboard', () => {
 
   it('should not update score of a finished game', () => {
     const game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
-    scoreboard.finishGame(game)
-    expect(() => scoreboard.updateScore(game, 1, 1)).toThrowError()
+    game.finish()
+    expect(() => game.updateScore(1, 1)).toThrowError()
   })
 
   it('should get summary of ongoing games', () => {
     let game = scoreboard.startGame('Mexico', 'Canada')
-    scoreboard.updateScore(game, 0, 5)
+    game.updateScore( 0, 5)
     game = scoreboard.startGame('Spain', 'Brazil')
-    scoreboard.updateScore(game, 10, 2)
+    game.updateScore( 10, 2)
     game = scoreboard.startGame('Germany', 'France')
-    scoreboard.updateScore(game, 2, 2)
+    game.updateScore( 2, 2)
     game = scoreboard.startGame('Uruguay', 'Italy')
-    scoreboard.updateScore(game, 6, 6)
+    game.updateScore( 6, 6)
     game = scoreboard.startGame('Argentina', 'Australia')
-    scoreboard.updateScore(game, 3, 1)
+    game.updateScore( 3, 1)
 
     expect(scoreboard.getSummary()).toEqual([
       '1. Uruguay 6 - Italy 6',

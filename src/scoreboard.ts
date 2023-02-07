@@ -9,19 +9,6 @@ export class Scoreboard {
     return game
   }
 
-  updateScore(game: Game, homePoints: number, awayPoints: number): Game {
-    if (game.getStatus() !== 'ONGOING') {
-      throw new Error('Cannot update score of a finished game')
-    }
-    game.setHomePoints(homePoints)
-    game.setAwayPoints(awayPoints)
-    return game
-  }
-
-  finishGame(game: Game): void {
-    game.setStatus('FINISHED')
-  }
-
   getSummary(): string[] {
     return this.games
       .filter((game) => game.getStatus() === 'ONGOING')

@@ -30,22 +30,22 @@ export class Game {
     return this.status
   }
 
-  setHomePoints(homePoints: number) {
-    if (homePoints < 0 || homePoints % 1 !== 0) {
+  updateScore(homePoints: number, awayPoints: number) {
+    if (this.getStatus() !== 'ONGOING') {
+      throw new Error('Cannot update score of a finished game')
+    }
+    if (homePoints < 0 || homePoints % 1 !== 0 || awayPoints < 0 || awayPoints % 1 !== 0) {
       throw new Error('Invalid score value')
     }
     this.homePoints = homePoints
-  }
-
-  setAwayPoints(awayPoints: number) {
-    if (awayPoints < 0 || awayPoints % 1 !== 0) {
-      throw new Error('Invalid score value')
-    }
     this.awayPoints = awayPoints
   }
 
-  setStatus(status: GameStatus) {
-    this.status = status
+  finish(): void {
+    if (this.getStatus() !== 'ONGOING') {
+      throw new Error('Game already finished')
+    }
+    this.status = 'FINISHED'
   }
 
   toString(): string {

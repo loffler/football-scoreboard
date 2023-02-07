@@ -22,6 +22,12 @@ describe('Scoreboard', () => {
     expect(scoreboard.getSummary()).toEqual(['1. FC Barcelona 2 - Real Madrid 1'])
   });
 
+  it('should not update score with negative values', () => {
+    const game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
+    expect(() => scoreboard.updateScore(game, -1, 1)).toThrowError()
+    expect(() => scoreboard.updateScore(game, 1.5, 1)).toThrowError()
+  })
+
   it('should finish game', () => {
     const game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
     scoreboard.startGame('FC Liverpool', 'Ajax Amsterdam')
@@ -30,6 +36,12 @@ describe('Scoreboard', () => {
     expect(scoreboard.getSummary()).toHaveLength(1)
     expect(scoreboard.getSummary()).toEqual(['1. FC Liverpool 0 - Ajax Amsterdam 0'])
   });
+
+  it('should not update score of a finished game', () => {
+    const game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
+    scoreboard.finishGame(game)
+    expect(() => scoreboard.updateScore(game, 1, 1)).toThrowError()
+  })
 
   it('should get summary of ongoing games', () => {
     let game = scoreboard.startGame('Mexico', 'Canada')

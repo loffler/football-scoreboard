@@ -31,10 +31,16 @@ export class Game {
   }
 
   setHomePoints(homePoints: number) {
+    if (homePoints < 0 || homePoints % 1 !== 0) {
+      throw new Error('Invalid score value')
+    }
     this.homePoints = homePoints
   }
 
   setAwayPoints(awayPoints: number) {
+    if (awayPoints < 0 || awayPoints % 1 !== 0) {
+      throw new Error('Invalid score value')
+    }
     this.awayPoints = awayPoints
   }
 

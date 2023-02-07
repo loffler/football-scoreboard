@@ -11,7 +11,7 @@ describe('Scoreboard', () => {
     const game = scoreboard.startGame('FC Barcelona', 'Real Madrid')
     expect(game.getHomePoints()).toEqual(0)
     expect(game.getAwayPoints()).toEqual(0)
-    expect(scoreboard.getSummary()).toHaveLength(1)
+    expect(scoreboard.getSummary()).toEqual('1. FC Barcelona 0 - Real Madrid 0')
   });
 
   it('should not start new game if one team is already playing', () => {
@@ -24,7 +24,7 @@ describe('Scoreboard', () => {
     game.updateScore(2, 1)
     expect(game.getHomePoints()).toEqual(2)
     expect(game.getAwayPoints()).toEqual(1)
-    expect(scoreboard.getSummary()).toEqual(['1. FC Barcelona 2 - Real Madrid 1'])
+    expect(scoreboard.getSummary()).toEqual('1. FC Barcelona 2 - Real Madrid 1')
   });
 
   it('should not update score with negative values', () => {
@@ -38,8 +38,7 @@ describe('Scoreboard', () => {
     scoreboard.startGame('FC Liverpool', 'Ajax Amsterdam')
     game.finish()
     expect(game.getStatus()).toEqual('FINISHED')
-    expect(scoreboard.getSummary()).toHaveLength(1)
-    expect(scoreboard.getSummary()).toEqual(['1. FC Liverpool 0 - Ajax Amsterdam 0'])
+    expect(scoreboard.getSummary()).toEqual('1. FC Liverpool 0 - Ajax Amsterdam 0')
   });
 
   it('should not update score of a finished game', () => {
@@ -66,6 +65,6 @@ describe('Scoreboard', () => {
       '3. Mexico 0 - Canada 5',
       '4. Argentina 3 - Australia 1',
       '5. Germany 2 - France 2',
-    ])
+    ].join('\n'))
   })
 })

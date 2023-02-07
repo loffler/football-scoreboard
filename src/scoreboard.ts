@@ -14,7 +14,7 @@ export class Scoreboard {
     return game
   }
 
-  getSummary(): string[] {
+  getSummary(): string {
     return this.games
       .filter((game) => game.getStatus() === 'ONGOING')
       .sort((game1, game2) => {
@@ -23,5 +23,6 @@ export class Scoreboard {
         return score2 - score1 || this.games.indexOf(game2) - this.games.indexOf(game1)
       })
       .map((game, index) => `${index+1}. ${game.toString()}`)
+      .join('\n')
   }
 }
